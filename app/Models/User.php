@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserProfile;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -22,6 +23,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'condominium_id', 'profile'
+    ];
+
+    protected $casts = [
+        'profile' => UserProfile::class
     ];
 
 
@@ -57,6 +62,6 @@ class User extends Authenticatable
     // Identify whether the user is an admin
     public function isAdmin()
     {
-        return $this->perfil === 'Administrador';
+        return $this->perfil === UserProfile::ADMIN;
     }
 }

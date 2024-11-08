@@ -13,13 +13,11 @@ class Condominium extends Model
         'name', 'adress', 'cnpj', 'phone', 'email', 'unity_quantity'
     ];
 
-    // Users relationship (a condo has many users)
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
     }
 
-    // Method to retrieve only the admins of a condo
     public function admins(): HasMany
     {
         return $this->users()->where('profile', 'admin');
